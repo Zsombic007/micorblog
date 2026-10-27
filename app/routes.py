@@ -69,7 +69,7 @@ def user(username):
         {"author": user, "body": "Test 1"},
         {"author": user, "body": "Test 2"}
     ]
-    return render_template("user1.html", user=user, posts = posts)
+    return render_template("user.html", user=user, posts = posts)
 
 
 @app.before_request
