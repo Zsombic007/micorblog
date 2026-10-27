@@ -107,3 +107,5 @@ Traceback (most recent call last):
     raise TemplateNotFound(template)
 jinja2.exceptions.TemplateNotFound: user1.html
 2026-10-27 11:40:37,474 INFO: Micorblog startup [in C:\dev\Microblog\app\__init__.py:41]
+2026-10-27 11:44:39,192 INFO: Micorblog startup [in C:\dev\Microblog\app\__init__.py:41]
+2026-10-27 11:45:13,099 INFO: Micorblog startup [in C:\dev\Microblog\app\__init__.py:41]

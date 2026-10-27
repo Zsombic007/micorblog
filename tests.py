@@ -25,7 +25,7 @@ class UserModelCase(unittest.TestCase):
 
     def test_avatar(self):
         u = User(username = "John", email = "john@example.com")
-        self.assertEqual(u.avatar(128), ("https://www.gravatar.com/avatar/'d4c74594d841139328695756648b6bd6'?d=identicon&s=128"))
+        self.assertEqual(u.avatar(128), ("https://www.gravatar.com/avatar/d4c74594d841139328695756648b6bd6?d=identicon&s=128"))
 
     def test_follow(self):
         u1 = User(username = "John", email = "john@example.com")
@@ -33,8 +33,8 @@ class UserModelCase(unittest.TestCase):
         db.session.add(u1)
         db.session.add(u2)
         db.session.commit()
-        follwing = db.session.scalars(u1.following.select().all())
-        followers = db.session.scalars(u2.followers.select().all())
+        follwing = db.session.scalars(u1.following.select()).all()
+        followers = db.session.scalars(u2.followers.select()).all()
         self.assertEqual(follwing, [])
         self.assertEqual(followers, [])
 
@@ -43,8 +43,8 @@ class UserModelCase(unittest.TestCase):
         self.assertTrue(u1.is_following(u2))
         self.assertEqual(u1.following_count(), 1)
         self.assertEqual(u2.followers_count(), 1)
-        u1_follwing = db.session.scalars(u1.following.select().all())
-        u2_followers = db.session.scalars(u2.followers.select().all())
+        u1_follwing = db.session.scalars(u1.following.select()).all()
+        u2_followers = db.session.scalars(u2.followers.select()).all()
         self.assertEqual(u1_follwing[0].username, "Susan")
         self.assertEqual(u2_followers[0].username, "John")
 
@@ -80,10 +80,10 @@ class UserModelCase(unittest.TestCase):
         u3.follow(u4)
         db.session.commit()
 
-        f1 = db.session.scalars(u1.following_posts().all())
-        f2 = db.session.scalars(u2.following_posts().all())
-        f3 = db.session.scalars(u3.following_posts().all())
-        f4 = db.session.scalars(u4.following_posts().all())
+        f1 = db.session.scalars(u1.following_posts()).all()
+        f4 = db.session.scalars(u4.following_posts()).all()
+        f2 = db.session.scalars(u2.following_posts()).all()
+        f3 = db.session.scalars(u3.following_posts()).all()
 
         self.assertEqual(f1, [p2, p4, p1])
         self.assertEqual(f2, [p2, p3])

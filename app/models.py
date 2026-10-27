@@ -75,7 +75,7 @@ class User(UserMixin, db.Model):
         Author = so.aliased(User)
         Follower = so.aliased(User)
         return(
-            sa.Select(Post)
+            sa.select(Post)
             .join(Post.author.of_type(Author))
             .join(Author.followers.of_type(Follower), isouter=True)
             .where(sa.or_(
