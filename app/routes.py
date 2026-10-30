@@ -1,29 +1,35 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm
 from flask_login import current_user, login_user, logout_user, login_required
 import sqlalchemy as sa
 from app import db
-from app.models import User
+from app.models import User, Post
 from urllib.parse import urlsplit
 from datetime import datetime, timezone
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods = ["POST","GET"])
+@app.route('/index', methods = ["POST", "GET"])
 @login_required
 def index():
-    posts = [
-        {
-            "author": {"username": "John"},
-            "body": "Szép nap van ma!"
-        },
-        {
-           "author": {"username":"Susan"},
-           "body": "A bosszuállók egy király film"
-        }
-    ]
-    return render_template("index.html", title = "Home",  posts=posts)
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author = current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash("Your post is now live")
+        return redirect(url_for("index"))
+
+    posts = db.session.scalars(current_user.following_posts()).all()
+    return render_template("index.html", title = "Home", form = form,  posts=posts)
+
+@app.route("/explore")
+@login_required
+def explore():
+    query = sa.select(Post).order_by(Post.timestamp.desc())
+    posts = db.session.scalars(query).all()
+    return render_template("index.html", title = "Explore", posts=posts)
 
 @app.route("/login", methods = ["GET", "POST"])
 def login():
