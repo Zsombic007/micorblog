@@ -25,7 +25,7 @@ class RegistrationForm(FlaskForm):
             raise ValidationError("Please use a different username.")
 
     def validate_email(self, emai):
-            user = db.session.scalar(sa.select(User).where(User.username == emai.data))
+            user = db.session.scalar(sa.select(User).where(User.email == emai.data))
             if user is not None:
                 raise ValidationError("Please use a different email.")
 
