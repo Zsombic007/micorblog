@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-11-03 23:49+0100\n"
+"POT-Creation-Date: 2026-11-04 00:07+0100\n"
 "PO-Revision-Date: 2026-11-03 23:51+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: hu\n"
@@ -38,7 +38,7 @@ msgstr "Jelszó"
 msgid "Remember Me"
 msgstr "Emlékezz rám"
 
-#: app/forms.py:13 app/routes.py:56
+#: app/forms.py:13 app/routes.py:57 app/templates/login.html:5
 msgid "Sign in"
 msgstr "Bejelentkezés"
 
@@ -50,7 +50,7 @@ msgstr "E-mail"
 msgid "Repeat Password"
 msgstr "Jelszó megerősítése"
 
-#: app/forms.py:20 app/routes.py:75
+#: app/forms.py:20 app/routes.py:76 app/templates/register.html:4
 msgid "Register"
 msgstr "Regisztráció"
 
@@ -78,65 +78,168 @@ msgstr "Írj valamit"
 msgid "Request Password Reset"
 msgstr "Jelszó-visszaállítás kérése"
 
-#: app/routes.py:23
+#: app/routes.py:24
 msgid "Your post is now live"
 msgstr "A bejegyzésed közzétéve"
 
-#: app/routes.py:29
+#: app/routes.py:30 app/templates/base.html:27
 msgid "Home"
 msgstr "Kezdőlap"
 
-#: app/routes.py:39
+#: app/routes.py:40 app/templates/base.html:30
 msgid "Explore"
 msgstr "Felfedezés"
 
-#: app/routes.py:49
+#: app/routes.py:50
 msgid "Invalid username or password"
 msgstr "Érvénytelen felhasználónév vagy jelszó"
 
-#: app/routes.py:73
+#: app/routes.py:74
 msgid "Congratulations, you are now registered user!"
 msgstr "Gratulálunk, sikeresen regisztráltál!"
 
-#: app/routes.py:104
+#: app/routes.py:107
 msgid "Your changes have been saved."
 msgstr "A módosításaid mentve lettek."
 
-#: app/routes.py:109
+#: app/routes.py:112
 msgid "Edit Profile"
 msgstr "Profil szerkesztése"
 
-#: app/routes.py:119 app/routes.py:139
+#: app/routes.py:122 app/routes.py:142
 #, python-format
 msgid "User %(username)s not found"
 msgstr "A(z) %(username)s nevű felhasználó nem található"
 
-#: app/routes.py:122
+#: app/routes.py:125
 msgid "You can't follow yourself!"
 msgstr "Saját magadat nem követheted!"
 
-#: app/routes.py:126
+#: app/routes.py:129
 #, python-format
 msgid "You are following %(username)s!"
 msgstr "Mostantól követed %(username)s felhasználót!"
 
-#: app/routes.py:142
+#: app/routes.py:145
 msgid "You can't unfollow yourself!"
 msgstr "Saját magad követését nem szüntetheted meg!"
 
-#: app/routes.py:146
+#: app/routes.py:149
 #, python-format
 msgid "You are not following %(username)s!"
 msgstr "Nem követed %(username)s felhasználót!"
 
-#: app/routes.py:160
+#: app/routes.py:163
 msgid "Check your email for the instructions to reset your password"
 msgstr "A jelszó visszaállításához szükséges útmutatót elküldtük e-mailben"
 
-#: app/routes.py:162
+#: app/routes.py:165 app/templates/reset_password_request.html:5
 msgid "Reset Password"
 msgstr "Jelszó visszaállítása"
 
-#: app/routes.py:175
+#: app/routes.py:178
 msgid "Your password has been reset."
 msgstr "A jelszavad visszaállítása megtörtént."
+
+#: app/templates/404.html:4
+msgid "Not Found"
+msgstr "Az oldal nem található"
+
+#: app/templates/404.html:5 app/templates/500.html:6
+msgid "Back"
+msgstr "Vissza"
+
+#: app/templates/500.html:4
+msgid "An unexpected error has occured"
+msgstr "Váratlan hiba történt"
+
+#: app/templates/500.html:5
+msgid "The adminstartion has been notifed. Sorry for the inconvenience!"
+msgstr "Az adminisztrátort értesítettük. Elnézést a kellemetlenségért!"
+
+#: app/templates/_post.html:14
+#, python-format
+msgid "%(username)s said %(when)s"
+msgstr "%(username)s ezt írta: %(when)s"
+
+#: app/templates/base.html:9
+msgid "Welcome to Microblog"
+msgstr "Üdvözöl a Microblog"
+
+#: app/templates/base.html:36
+msgid "Login"
+msgstr "Bejelentkezés"
+
+#: app/templates/base.html:40
+msgid "Profile"
+msgstr "Profil"
+
+#: app/templates/base.html:43
+msgid "Logout"
+msgstr "Kijelentkezés"
+
+#: app/templates/edit_profile.html:5
+msgid "Edit profile"
+msgstr "Profil szerkesztése"
+
+#: app/templates/index.html:5
+msgid "Hi, %(username)s!"
+msgstr "Szia, %(username)s!"
+
+#: app/templates/index.html:27 app/templates/user.html:41
+msgid "Newer posts"
+msgstr "Újabb bejegyzések"
+
+#: app/templates/index.html:32 app/templates/user.html:46
+msgid "Older posts"
+msgstr "Régebbi bejegyzések"
+
+#: app/templates/login.html:27
+msgid "Forgot Your Password?"
+msgstr "Elfelejtetted a jelszavadat?"
+
+#: app/templates/login.html:28
+msgid "Click here to Reset It"
+msgstr "Kattints ide a visszaállításhoz"
+
+#: app/templates/login.html:30
+msgid "New User?"
+msgstr "Új felhasználó vagy?"
+
+#: app/templates/login.html:30
+msgid "Click to register!"
+msgstr "Kattints a regisztrációhoz!"
+
+#: app/templates/reset_password.html:4
+msgid "Reset Your Password"
+msgstr "Jelszavad visszaállítása"
+
+#: app/templates/user.html:8
+msgid "User"
+msgstr "Felhasználó"
+
+#: app/templates/user.html:10
+msgid "Last seen on"
+msgstr "Utoljára itt járt"
+
+#: app/templates/user.html:11
+#, python-format
+msgid "%(count)d followers"
+msgstr "%(count)d követő"
+
+#: app/templates/user.html:11
+#, python-format
+msgid "%(count)d following"
+msgstr "%(count)d követés"
+
+#: app/templates/user.html:13
+msgid "Edit your profile"
+msgstr "Profilod szerkesztése"
+
+#: app/templates/user.html:18
+msgid "Follow"
+msgstr "Követés"
+
+#: app/templates/user.html:25
+msgid "Unfollow"
+msgstr "Követés megszüntetése"
