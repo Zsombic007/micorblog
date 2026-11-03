@@ -23,6 +23,15 @@ class UserModelCase(unittest.TestCase):
         self.assertFalse(u.check_password("dog"))
         self.assertTrue(u.check_password("cat"))
 
+    def test_password_reset_token(self):
+        u = User(username="Susan", email="susan@example.com")
+        db.session.add(u)
+        db.session.commit()
+
+        token = u.get_reset_password_token()
+        self.assertIs(User.verify_reset_password_token(token), u)
+        self.assertIsNone(User.verify_reset_password_token("invalid-token"))
+
     def test_avatar(self):
         u = User(username = "John", email = "john@example.com")
         self.assertEqual(u.avatar(128), ("https://www.gravatar.com/avatar/d4c74594d841139328695756648b6bd6?d=identicon&s=128"))
