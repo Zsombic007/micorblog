@@ -7,10 +7,10 @@ def translate(text, source_language, dest_language):
     if 'MS_TRANSLATOR_KEY' not in current_app.config or \
             not current_app.config['MS_TRANSLATOR_KEY']:
         return _('Error: the translation service is not configured.')
-    auth = {
-        'Ocp-Apim-Subscription-Key': current_app.config['MS_TRANSLATOR_KEY'],
-        'Ocp-Apim-Subscription-Region': 'germanywestcentral'
-    }
+    auth = {'Ocp-Apim-Subscription-Key': current_app.config['MS_TRANSLATOR_KEY']}
+    region = current_app.config.get('MS_TRANSLATOR_REGION')
+    if region:
+        auth['Ocp-Apim-Subscription-Region'] = region
     r = requests.post(
         'https://api.cognitive.microsofttranslator.com'
         '/translate?api-version=3.0&from={}&to={}'.format(
