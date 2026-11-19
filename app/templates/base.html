@@ -101,7 +101,10 @@
               customClass: "d-inline"
             });
             popups[i].addEventListener("show.bs.popover", async (ev) => {
-              const response = await fetch("/user/"+ev.target.innerText.trim()+"/popup");
+              if (ev.target.popupLoaded) return;
+              const username = ev.target.querySelector("a").innerText.trim();
+              const response = await fetch("/user/"+encodeURIComponent(username)+"/popup");
+              if (!response.ok) return;
               const data = await response.text();
               if (popover && data){
                 ev.target.popupLoaded = true;

@@ -1,4 +1,5 @@
 from datetime import datetime, timezone
+from urllib.parse import urlsplit
 from flask import render_template, flash, redirect, url_for, request, g, current_app
 from flask_login import current_user, login_required
 from flask_babel import _, get_locale
@@ -101,6 +102,14 @@ def edit_profile():
                            form=form)
 
 
+def redirect_back(fallback):
+    """Redirect to the page the request came from, if it is on this host."""
+    referrer = request.referrer
+    if referrer and urlsplit(referrer).netloc == request.host:
+        return redirect(referrer)
+    return redirect(fallback)
+
+
 @bp.route('/follow/<username>', methods=['POST'])
 @login_required
 def follow(username):
@@ -117,7 +126,7 @@ def follow(username):
         current_user.follow(user)
         db.session.commit()
         flash(_('You are following %(username)s!', username=username))
-        return redirect(url_for('main.user', username=username))
+        return redirect_back(url_for('main.user', username=username))
     else:
         return redirect(url_for('main.index'))
 
@@ -138,7 +147,7 @@ def unfollow(username):
         current_user.unfollow(user)
         db.session.commit()
         flash(_('You are not following %(username)s.', username=username))
-        return redirect(url_for('main.user', username=username))
+        return redirect_back(url_for('main.user', username=username))
     else:
         return redirect(url_for('main.index'))
 
