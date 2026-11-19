@@ -5,3 +5,4 @@ app.db
 .env
 /logs
 messages.pot
+*.mo
